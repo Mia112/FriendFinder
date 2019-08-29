@@ -13,7 +13,7 @@
     <div class="container">
         <a class="navbar-brand" href="/">FriendFinder
         </a>
-        <a class="api-link" href="/api/friends">API 
+        <a class="api-link" href="/api/friends">API
         </a>
     </div>
 </nav>
@@ -31,19 +31,23 @@
                             <label for="name">Name
                                 <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control question" name="name" id="name" aria-describedby="Help" placeholder="Enter Name" autocomplete="off">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your name with anyone else.</small>
+                            <input type="text" class="form-control question" name="name" id="name"
+                                aria-describedby="Help" placeholder="Enter Name" autocomplete="off">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your name with anyone
+                                else.</small>
                         </div>
                         <div class="form-group">
                             <label for="photo">Image
                                 <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control question" name="photo" id="photo" placeholder="Enter Image Url" autocomplete="off">
+                            <input type="text" class="form-control question" name="photo" id="photo"
+                                placeholder="Enter Image Url" autocomplete="off">
                         </div>
                     </div>
 
                     <h1 class="formTitle">Survey Questions</h1>
-                    <p class="scale">1 is all the time; 2 is most of the time. 3 is sometimes; 4 is hardly ever; 5 is never</p>
+                    <p class="scale">1 is all the time; 2 is most of the time. 3 is sometimes; 4 is hardly ever; 5 is
+                        never</p>
                     <div class="form-area">
                         <div class="form-group">
                             <h6>Question 1
@@ -64,7 +68,8 @@
                             <h6>Question 2
                                 <span class="required">*</span>
                             </h6>
-                            <label for="inputState">  I would take a better job even if it meant moving to another state.</label>
+                            <label for="inputState"> I would take a better job even if it meant moving to another
+                                state.</label>
                             <select class="form-control question col-md-2" name="q2" id="q2">
                                 <option name="" value="">Select Option</option>
                                 <option name="value1" value="1"> 1 </option>
@@ -78,7 +83,7 @@
                             <h6>Question 3
                                 <span class="required">*</span>
                             </h6>
-                            <label for="inputState">  I would rather eat out at a restaurant than at home..</label>
+                            <label for="inputState"> I would rather eat out at a restaurant than at home..</label>
                             <select class="form-control question col-md-2" name="q3" id="q3">
                                 <option name="" value="">Select Option</option>
                                 <option name="value1" value="1"> 1 </option>
@@ -93,7 +98,8 @@
                             <h6>Question 4
                                 <span class="required">*</span>
                             </h6>
-                            <label for="inputState"> I like to spend my leisure time actively socializing with other people..</label>
+                            <label for="inputState"> I like to spend my leisure time actively socializing with other
+                                people..</label>
                             <select class="form-control question col-md-2" name="q4" id="q4">
                                 <option name="" value="">Select Option</option>
                                 <option name="value1" value="1"> 1 </option>
@@ -179,7 +185,8 @@
                             <h6>Question 10
                                 <span class="required">*</span>
                             </h6>
-                            <label for="inputState">In a discussion, truth should be more important than people’s sensitivities.</label>
+                            <label for="inputState">In a discussion, truth should be more important than people’s
+                                sensitivities.</label>
                             <select class="form-control question col-md-2" name="q10" id="q10">
                                 <option name="" value="">Select Option</option>
                                 <option name="value1" value="1"> 1 </option>
@@ -189,7 +196,7 @@
                                 <option name="value5" value="5"> 5 </option>
                             </select>
                         </div>
-                        
+
                         <button type="submit" id="submit" class="btn submit">Submit</button>
                     </div>
                 </form>
@@ -197,8 +204,8 @@
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="largeModal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -226,8 +233,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" id="smallModal" role="dialog" aria-labelledby="mySmallModalLabel"
-        aria-hidden="true">
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" id="smallModal" role="dialog"
+        aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content small-modal">
                 <div class="modal-header">
@@ -241,56 +248,56 @@
         </div>
     </div>
 
-<script type="text/javascript">
-$("#submit").on("click", function() {
-    function validateForm() {
-        let valid = true;
-        $('.form-control').each(function () {
-            if ($(this).val() === "") valid = false;
+    <script type="text/javascript">
+        $("#submit").on("click", function () {
+            function validateForm() {
+                let valid = true;
+                $('.form-control').each(function () {
+                    if ($(this).val() === "") valid = false;
+                });
+                return valid;
+            }
+            if (validateForm() === true) {
+                let userData = {
+                    name: $("#name").val(),
+                    photo: $("#photo").val(),
+                    score: [
+                        $("q1").val(),
+                        $("q2").val(),
+                        $("q3").val(),
+                        $("q4").val(),
+                        $("q5").val(),
+                        $("q6").val(),
+                        $("q7").val(),
+                        $("q8").val(),
+                        $("q9").val(),
+                        $("q10").val()
+                    ]
+                };
+                // const currentURL = window.location.origin;
+                $.post("ajax/friends.js", userData, function (data) {
+                    $("#matchName").text(data.name);
+                    $("#matchImg").attr("src", data.photo);
+                    $("#largeModal").modal("toggle");
+                });
+
+
+                // $.post("/api/friends", userData, function (data) {
+                //     $("#matchName").text(data.name);
+                //     $("#matchImg").attr("src", data.photo);
+                //     $("#largeModal").modal("toggle");
+
+                // });
+            } else {
+                alert("Please fill out all required fields");
+            }
+
         });
-        return valid;
-    }
-    if (validateForm() === true) {
-        let userData = {
-            name: $("#name").val(),
-            photo: $("#photo").val(),
-            score: [
-                $("q1").val(),
-                $("q2").val(),
-                $("q3").val(),
-                $("q4").val(),
-                $("q5").val(),
-                $("q6").val(),
-                $("q7").val(),
-                $("q8").val(),
-                $("q9").val(),
-                $("q10").val()
-            ]
-        };
-        const currentURL = window.location.origin;
-
-        $.post(currentURL + "/api/friends", userData, function(data) {
-            $("#matchName").text(data.name);
-            $("#matchImg").attr("src", data.photo);
-            $("#largeModal").modal("toggle");
-
-        });
-    }else {
-        alert("Please fill out all required fields");
-    }
-      
-});
+    </script>
 
 
-</script>
-
-
-
-
-
-
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/assets/js/survey.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
