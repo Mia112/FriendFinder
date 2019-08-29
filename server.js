@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const apiRoutes = require("./app/routing/apiRoutes.js")(app);
-const htmlRoutes = require("./app/routing/htmlRoutes.js")(app);
+ apiRoutes = require("./app/routing/apiRoutes.js")(app);
+ htmlRoutes = require("./app/routing/htmlRoutes.js")(app);
 
 // require('./app/routing/apiRoutes.js')(app);
 // require('./app/routing/htmlRoutes.js')(app);
