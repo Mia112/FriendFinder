@@ -261,25 +261,32 @@
                 let userData = {
                     name: $("#name").val(),
                     photo: $("#photo").val(),
-                    score: [
-                        $("q1").val(),
-                        $("q2").val(),
-                        $("q3").val(),
-                        $("q4").val(),
-                        $("q5").val(),
-                        $("q6").val(),
-                        $("q7").val(),
-                        $("q8").val(),
-                        $("q9").val(),
-                        $("q10").val()
-                    ]
+                    scores: function () {
+                var arr = [];
+                $('select').each(function () {
+                    arr.push(parseInt($(this).val()));
+                });
+                return arr;
+            }()
+                    // scores: [
+                    //     $("q1").val(),
+                    //     $("q2").val(),
+                    //     $("q3").val(),
+                    //     $("q4").val(),
+                    //     $("q5").val(),
+                    //     $("q6").val(),
+                    //     $("q7").val(),
+                    //     $("q8").val(),
+                    //     $("q9").val(),
+                    //     $("q10").val()
+                    // ]
                 };
-                // const currentURL = window.location.origin;
+                
                 $.post("ajax/friends.js", userData, function (data) {
                     $("#matchName").text(data.name);
                     $("#matchImg").attr("src", data.photo);
-                    $("#largeModal").modal("toggle");
                 });
+                $("#largeModal").modal("toggle");
 
 
                 // $.post("/api/friends", userData, function (data) {

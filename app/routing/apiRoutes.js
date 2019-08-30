@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-
+const app = express();
 module.exports = function (app) {
     // //api GET request for friends json
     // app.get("/api/friends", function (req, res) {
@@ -17,32 +17,30 @@ app.get('/api/friends', function (req, res) {
 });
     //post route to submit new friend
     app.post("/api/friends", function (req, res) {
+        var userData = req.body;
+       
         const totalDifference = 0;
-        const bestMatch = {
+       
+        const matched = {
             name: "",
             photo: "",
-            friendDifference: 1000
+            friendDifference: 100
+            
         };
-
-        const userData = req.body;
-        const userName = userData.name;
-        const userScores = userData.scores;
-
-        const b = userScores.map(function(item) {
-            return parseInt(item, 10);
-        });
-
+     
+       
         userData = {
             name: req.body.name,
             photo: req.body.photo,
-            scores: b
+            scores: req.body.scores
         };
-        console.log("Name: " + userName);
-        console.log("User score: " + userScores);
+        // console.log(req.body);
+        console.log("Name: " + userData.name);
+        console.log("User score: " + userData.scores);
 
-        const sum = b.reduce((a, b) => a + b, 0);
+        const sum = userData.scores.reduce((a, b) => a + b, 0);
         console.log("Sum of users score " + sum);
-        console.log("Best match friend diff " + bestMatch.friendDifference)
+        console.log("Best match friend diff " + matched.friendDifference)
         console.log("+++++++++++++============================================");
 
         for(let i = 0; i < friends.length; i++) {
@@ -56,58 +54,24 @@ app.get('/api/friends', function (req, res) {
             totalDifference += Math.abs(sum - bestFriendScore);
             console.log("-----------------------------> " + totalDifference);
 
-            if (totalDifference <= bestMatch.friendDifference) {
-                bestMatch.name = friends[i].name;
-                bestMatch.photo = friends[i].photo;
-                bestMatch.friendDifference = totalDifference;
+            if (totalDifference <= matched.friendDifference) {
+                matched.name = friends[i].name;
+                matched.photo = friends[i].photo;
+                matched.friendDifference = totalDifference;
 
             }
             console.log(totalDifference + "Total Difference");
         }
 
 
-        console.log(bestMatch);
+        console.log(matched);
         friends.push(userData);
         console.log("New User added");
         console.log(userData);
-        res.json(bestMatch);
+        res.json(matched);
 
     });
 
-
-
-// //post route to submit new friend
-// app.post('/api/friends', function (req, res) {
-//     var newFriend = req.body;
-//     //initialize bestMatch number that starts at the highest possible variance
-//     var bestMatch = 40;
-//     var matchedFriend = {};
-//     var variance;
-//     //select each friend from the group
-//     matches.forEach(friend => {
-//         variance = 0;
-//         //Compare each friend score to the score of the new friend 
-//         for (var i = 0; i < friend.scores.length && i < newFriend.scores.length; i++) {
-//             //Add up the absolute difference from comparing each of their score
-//             variance += Math.abs(parseInt(friend.scores[i]) - parseInt(newFriend.scores[i]));
-//         }
-//         //compare the total difference to the highest possible difference
-//         if (variance <= bestMatch) {
-//             //if the difference is less or equal, the difference is now the best matched
-//             bestMatch = variance;
-//             //create a new object of the matched friend to be send back in the response
-//             matchedFriend = {
-//                 name: friend.name,
-//                 image: friend.image,
-//                 score: bestMatch
-//             };
-//         }
-//     });
-//     matches.push(newFriend);
-//     //send the matched friend back
-//     res.json(matchedFriend);
-
-// });
 
 
 };
