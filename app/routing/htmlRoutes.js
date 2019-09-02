@@ -1,20 +1,28 @@
-const path = require('path');
+
+// DEPENDENCIES
+// We need to include the path package to get the correct file path for our html
+// ===============================================================================
+var path = require('path');
 
 
 
+// ROUTING
 
-// define the routes we will be exporting to the server
-module.exports = function(app) {
+module.exports = function (app) {
 
-	// the /survey route will take us to survey.html page
-	app.get("/survey", function(req, res) {
-		res.sendFile(path.join(__dirname, "../public/survey.html"));
+
+	app.get('/survey', function (req, res) {
+		res.sendFile(path.join(__dirname + '/../public/survey.html'));
 	});
 
 	// every other url path will take us to the home.html page
 	app.get("*", function(req, res) {
-		console.log("here")
+	
 		res.sendFile(path.join(__dirname, "../public/home.html"));
 	});
-};
 
+	// If no matching route is found default to home
+	app.use(function (req, res) {
+		res.sendFile(path.join(__dirname + '/../public/home.html'));
+	});
+};
