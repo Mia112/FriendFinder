@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>FriendFinder</title>
     <!-- Latest compiled and minified CSS & JS -->
+ 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -223,7 +224,7 @@
                         </div>
                         <div class="col-6">
                             <div>
-                                <h3 class="matchedName">Name:
+                                <h3 class="matchName">Name:
                                     <span id="matchName"></span>
                                 </h3>
                             </div>
@@ -249,63 +250,58 @@
     </div>
 
     <script type="text/javascript">
-        $("#submit").on("click", function () {
+        $("#submit").on("click", function() {
             function validateForm() {
-                let valid = true;
-                $('.form-control').each(function () {
+                var valid = true;
+                $('.form-control').each(function() {
                     if ($(this).val() === "") valid = false;
                 });
                 return valid;
             }
+            //If all required fields are filled
             if (validateForm() === true) {
-                let userData = {
+                // Create an object for the user's data
+                var userData = {
                     name: $("#name").val(),
                     photo: $("#photo").val(),
-                    scores: function () {
-                var arr = [];
-                $('select').each(function () {
-                    arr.push(parseInt($(this).val()));
-                });
-                return arr;
-            }()
-                    // scores: [
-                    //     $("q1").val(),
-                    //     $("q2").val(),
-                    //     $("q3").val(),
-                    //     $("q4").val(),
-                    //     $("q5").val(),
-                    //     $("q6").val(),
-                    //     $("q7").val(),
-                    //     $("q8").val(),
-                    //     $("q9").val(),
-                    //     $("q10").val()
-                    // ]
+                 
+                    scores: [
+                        $("q1").val(),
+                        $("q2").val(),
+                        $("q3").val(),
+                        $("q4").val(),
+                        $("q5").val(),
+                        $("q6").val(),
+                        $("q7").val(),
+                        $("q8").val(),
+                        $("q9").val(),
+                        $("q10").val(),
+                    ]
                 };
-                
-                $.post("ajax/friends.js", userData, function (data) {
+
+                	// Grab the URL of the website
+        var currentURL = window.location.origin;
+        
+            	// AJAX post the data to the friends API.         
+                $.post(currentURL + "/api/friends", userData, function (data) {
+                    // Grab the result from the AJAX post so that the best match's name and photo are displayed.
                     $("#matchName").text(data.name);
                     $("#matchImg").attr("src", data.photo);
+
+                    // Show the modal with the best match
+                    $("#largeModal").modal("toggle");
                 });
-                $("#largeModal").modal("toggle");
 
-
-                // $.post("/api/friends", userData, function (data) {
-                //     $("#matchName").text(data.name);
-                //     $("#matchImg").attr("src", data.photo);
-                //     $("#largeModal").modal("toggle");
-
-                // });
             } else {
-                alert("Please fill out all required fields");
+                alert("Please fill out all fields before submitting!");
             }
-
+            return false;
         });
     </script>
 
-
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/assets/js/survey.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 

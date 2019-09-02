@@ -1,30 +1,37 @@
+//Dependencies
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
 
 // require('./app/routing/apiRoutes.js')(app);
 // require('./app/routing/htmlRoutes.js')(app);
 
-const app = express();
-const PORT = process.env.PORT || 8080;
+// Hey, Node - we have an express app
+var app = express();
 
-// Sets up the Express app to handle data parsing
-app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.json());
+// create a port for localhost(using postman in this instance)
+var PORT = process.env.PORT || 8080;
 
+// express middleware for serving static files 
+app.use(express.static("app/public"));
+
+
+// set up body Parser
 app.use(bodyParser.json());
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json"}));
-
-// app.use('/assets', express.static('assets'));
-app.use(express.static('app/public'));
-
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.text({type: "text/html"}));
+app.use(bodyParser.json({type: "application/*+json" }));
+app.use(bodyParser.raw({type: "application/vnd.custom-type"}));
 
 
+//all of the other routs
  apiRoutes = require("./app/routing/apiRoutes.js")(app);
+
+ //html route
  htmlRoutes = require("./app/routing/htmlRoutes.js")(app);
 
+ // set up a listener on the port
 app.listen(PORT, () => console.log("App listening on PORT " + PORT));
 
 
