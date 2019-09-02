@@ -1,0 +1,49 @@
+html{
+    height:100%;
+}
+.home{
+    background-image: url('/Users/msheriff/FriendFinder/assets/img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.heading{
+    letter-spacing:3px;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color:#03726c;
+}
+
+.content{
+    padding-top: 100px;
+    text-align: center;
+}
+
+
+
+.content p{
+    font-size: 1.2rem;
+    color:rgb(255, 255, 255);
+}
+
+.survey-button {
+    color: rgb(248, 242, 242);
+    background-color: #03726c;
+    border-color: #f0f0f0;
+    width:15rem;
+    border-radius: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    outline-color: none;
+    letter-spacing: 0.2rem;
+}
+
+.survey-button:hover {
+    color: rgb(231, 227, 227);
+    border-color: #094637dc;
+}
+
+label, h6{
+    color:rgb(73, 72, 72);
+}
