@@ -7,14 +7,14 @@
             event.preventDefault();
             //form validation for empty spaces
             function validateForm() {
-                var valid1 = true;
+                var valid = true;
                 $(".validate").each(function () {
                     if ($(this).val() === '') {
-                        valid1 = false;
+                        valid = false;
                     }
                 });
 
-                return valid1;
+                return valid;
             }
             if (validateForm() == true) {
 
@@ -35,14 +35,14 @@
                         $("#q10").val()
                     ]
                 };
-                console.log(newFriend);
+               
                 // AJAX post the data to the friends API.
-              
+    
                 $.post("/api/friends", newFriend, function (data) {
                     // Grab the best matched from the AJAX response.
                     $("#matchName").text(data.name);
                     $("#matchImg").attr("src", data.photo);
-                    alert("Adding new friend...");
+                    
                 });
 
                 // Show the modal with the best match
