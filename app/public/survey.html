@@ -37,7 +37,7 @@
                             <label for="name">Name
                                 <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control question" name="name" id="name"
+                            <input type="text" class="form-control question validate" name="name" id="name"
                                 aria-describedby="Help" placeholder="Enter Name" autocomplete="off">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your name with anyone
                                 else.</small>
@@ -46,14 +46,14 @@
                             <label for="photo">Image
                                 <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control question" name="photo" id="photo"
+                            <input type="text" class="form-control question validate" name="photo" id="photo"
                                 placeholder="Enter Image Url" autocomplete="off">
                         </div>
                     </div>
 
                     <h5><strong>Question 1</strong></h5>
                     <label for="q1">I am always busy - always on the go.</label>
-                    <select data-placeholder="" class="browser-default" id="q1">
+                    <select data-placeholder="" class="browser-default validate" id="q1">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -65,7 +65,7 @@
 
                     <h5><strong>Question 2</strong></h5>
                     <label for="q2">I would rather eat out at a restaurant than at home.</label>
-                    <select data-placeholder="" class="browser-default" id="q2">
+                    <select data-placeholder="" class="browser-default validate" id="q2">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -77,7 +77,7 @@
 
                     <h5><strong>Question 3</strong></h5>
                     <label for="q3">I make friends easily</label>
-                    <select data-placeholder="" class="browser-default" id="q3">
+                    <select data-placeholder="" class="browser-default validate" id="q3">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -89,7 +89,7 @@
 
                     <h5><strong>Question 4</strong></h5>
                     <label for="q4">I believe that people generally have good intentions</label>
-                    <select data-placeholder="" class="browser-default" id="q4">
+                    <select data-placeholder="" class="browser-default validate" id="q4">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -101,7 +101,7 @@
 
                     <h5><strong>Question 5</strong></h5>
                     <label for="q5">I go out of my way to seek adventure</label>
-                    <select data-placeholder="" class="browser-default" id="q5">
+                    <select data-placeholder="" class="browser-default validate" id="q5">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -114,7 +114,7 @@
                     <h5><strong>Question 6</strong></h5>
                     <label for="q6">I can stay calm under pressure.</label>
 
-                    <select data-placeholder="" class="browser-default" id="q6">
+                    <select data-placeholder="" class="browser-default validate" id="q6">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -126,7 +126,7 @@
 
                     <h5><strong>Question 7</strong></h5>
                     <label for="q7">I often make decisions on a whim.</label>
-                    <select data-placeholder="" class="browser-default" id="q7">
+                    <select data-placeholder="" class="browser-default validate" id="q7">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -138,7 +138,7 @@
 
                     <h5><strong>Question 8</strong></h5>
                     <label for="q8">I love to help others.</label>
-                    <select data-placeholder="" class="browser-default" id="q8">
+                    <select data-placeholder="" class="browser-default validate" id="q8">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -150,7 +150,7 @@
 
                     <h5><strong>Question 9</strong></h5>
                     <label for="q9">I always know exactly what I want.</label>
-                    <select data-placeholder="" class="browser-default" id="q9">
+                    <select data-placeholder="" class="browser-default validate" id="q9">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -162,7 +162,7 @@
 
                     <h5><strong>Question 10</strong></h5>
                     <label for="q10">I frequently and easily express my feelings and emotions.</label>
-                    <select data-placeholder="" class="browser-default" id="q10">
+                    <select data-placeholder="" class="browser-default validate" id="q10">
 
                         <option value="">Choose an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
@@ -199,75 +199,8 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $('.modal').modal();
 
-            $("#submit").on("click", function (event) {
-                event.preventDefault();
-                //form validation for empty spaces
-                function validateForm() {
-                    var valid1 = true;
-                    $(".validate").each(function () {
-                        if ($(this).val() === '') {
-                            valid1 = false;
-                        }
-                    });
-
-                    return valid1;
-                }
-                if (validateForm() == true) {
-
-                    // Create a new friend object
-                    var newFriend = {
-                        name: $("#name").val().trim(),
-                        photo: $("#photo").val().trim(),
-                        scores: [
-                            $("#q1").val(),
-                            $("#q2").val(),
-                            $("#q3").val(),
-                            $("#q4").val(),
-                            $("#q5").val(),
-                            $("#q6").val(),
-                            $("#q7").val(),
-                            $("#q8").val(),
-                            $("#q9").val(),
-                            $("#q10").val()
-                        ]
-                    };
-                    // AJAX post the data to the friends API.
-                    $.post("/api/friends", newFriend, function (data) {
-                        // Grab the best matched from the AJAX response.
-                        $("#matchName").text(data.name);
-                        $("#matchImg").attr("src", data.photo);
-                        alert("Adding new friend...");
-                    });
-
-                    // Show the modal with the best match
-                    $("#modal1").modal("open");
-                    //clear form submission
-                    $("#name").val("");
-                    $("#photo").val("");
-                    $("#q1").val("");
-                    $("#q2").val("");
-                    $("#q3").val("");
-                    $("#q4").val("");
-                    $("#q5").val("");
-                    $("#q6").val("");
-                    $("#q7").val("");
-                    $("#q8").val("");
-                    $("#q9").val("");
-                    $("#q10").val("");
-                } else {
-                    alert("Please fill out ALL of the fields before submitting you profile.")
-                }
-
-
-            });
-
-        });
-    </script>
-
+    <script type="text/javascript" src="app/public/survey.js"></script>
 
 </body>
 

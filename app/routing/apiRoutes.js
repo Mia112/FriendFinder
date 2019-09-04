@@ -11,7 +11,7 @@ module.exports = function (app) {
       // user input get submited to the server.
       app.post("/api/friends", function(req, res) {
 
-        console.log(req.body)
+        // console.log(req.body)
     // this empty object will hold the "best match". 
     var bestMatch = {
       name: "",
@@ -21,6 +21,7 @@ module.exports = function (app) {
 
     var newFriend = req.body;
     var userScores = newFriend.scores;
+    console.log(newFriend.scores);
 
 
     // This variable will calculate the difference between the user"s scores and the scores of
@@ -56,7 +57,7 @@ module.exports = function (app) {
 
   
     // Return a JSON with the user's bestMatch. This will be used by the HTML in the next page
-    res.render(bestMatch);
+    res.json(bestMatch);
 
   });
 
