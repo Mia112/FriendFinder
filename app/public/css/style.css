@@ -1,8 +1,12 @@
 html {
     height: 100%;
 }
-    
-.container {
+body {
+    background-image: url('/css/img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+.jumbotron {
     background-image: url("app/public/img/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -14,28 +18,48 @@ html {
     font-weight: bold;
     color: #03726c;
 }
-label {
+ label {
     font-size: 1.3rem;
+    color: rgb(83, 83, 83);
 }
-
+h5 {
+    color: #03726c;
+}
 .content {
     padding-top: 100px;
     text-align: center;
+} 
+
+.container {
+   
+    width: 80%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+   
+}
+#links {
+
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.navbar-brand{
+   color:rgb(7, 110, 110);
+    font-size: 2rem;
 }
 
 
 
-.content p {
-    font-size: 1.2rem;
-    color: rgb(255, 255, 255);
-}
-
-.survey-button {
+#survey-button {
+   
     color: rgb(248, 242, 242);
     background-color: rgb(42, 112, 91);
     border-color: #f0f0f0;
     width: 15rem;
-    border-radius: 40px;
+    border-radius: 10px;
     font-size: 1.5rem;
     font-weight: bold;
     outline-color: none;
@@ -49,7 +73,7 @@ label {
 
 
 .surveyBody {
-    background-color: rgb(7, 110, 110);
+    background-color: rgb(252, 252, 252);
 }
 
 .surveyBody > .container{
@@ -58,8 +82,7 @@ label {
 
 
 nav {
-    color: rgb(255, 255, 255);
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(170, 170, 170);
     width: 100%;
     height: 56px;
     line-height: 56px;
@@ -68,6 +91,7 @@ nav {
 .api-link {
     color:rgb(7, 110, 110);
     font-size: 1.5rem;
+
 }
 
 .api-link:hover {
@@ -76,61 +100,29 @@ nav {
 
 
 .form-area{
-    background-color:rgb(238, 238, 238); 
+    background-color:rgb(218, 218, 218); 
     padding: 2%; 
     border-radius: 10px;
 }
 
 .required{
-    color:red;
+    color:rgba(245, 71, 71, 0.966);
 }
 
-.modal-header {
-    background: #d4d3d3
-}
 
-.small-modal p{
-    padding: 2rem;
-    font-size: 1.5rem;
 
-}
-
-.small-modal {
-    background-color: #f4f6f6;
-}
-
-.error-text{
-    color:red;
-}
 
 #submit {
-    color: #fff;
-    background-color: #da7c7ca2;
-    border-color: #da7c7c;;
-    width: 100%;
-    border-radius: 50px;
-    font-weight: bold;
+    color: rgb(248, 242, 242);
+    background-color: rgb(42, 112, 91);
+    border-color: #f0f0f0;
+    width: 15rem;
+    border-radius: 10px;
     font-size: 1.5rem;
-    letter-spacing: 0.1rem;
+    font-weight: bold;
+    outline-color: none;
+    letter-spacing: 0.2rem;
 }
 
-.small-modal-title{
-    color:#ce6262;
-}
 
-.large-modal-title{
-    color: rgb(134, 32, 32);
-}
 
-.matched-image{
-height:auto; 
-width:100%; 
-margin: 4% 0;
-}
-
-.matchedName{
-    color: rgb(134, 32, 32);
-    text-align: center;
-    padding-top: 1rem;
-    letter-spacing: 0.1rem;
-}

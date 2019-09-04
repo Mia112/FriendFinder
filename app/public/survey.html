@@ -8,26 +8,28 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>FriendFinder Survey</title>
 
 </head>
 <nav class="navbar fixed-top navbar-light bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Friend Finder
-        </a>
-        <a class="api-link" href="/api/friends">API
-        </a>
+    <div class="container" id="links">
+    
+        <a class="navbar-brand" href="/">Friend Finder</a>
+        <a class="api-link" href="/api/friends">API</a>
     </div>
+   
 </nav>
+
+
 
 <body class="surveyBody">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <form id="inforForm" action="/api/friends" method="POST">
-                    <h1 class="formTitle">Your Information</h1>
+                    <h3 class="heading">Complete the Survey</h3>
                     <p>
                         <span class="required">*</span> Required field</p>
                     <div class="form-area">
@@ -172,7 +174,7 @@
                     <br>
                     <br>
                     <br>
-                
+
 
                     <button type="submit" data-target="modal1" id="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -186,11 +188,12 @@
         <div class="modal-content">
             <div class="modal-header">
 
-                <h2 class="modal-title"><strong>Your Match:</strong></h2>
+                <h3 class="modal-title">Your Match:</h3>
             </div>
-            <h4 id="matchName"></h4>
-            <img id="matchImg" class="img-responsive" src="" alt="friend">
-
+            <div class="modal-body">
+                <h4 id="matchName"></h4>
+                <img id="matchImg" src="" alt="match Image">
+            </div>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -200,42 +203,64 @@
         $(document).ready(function () {
             $('.modal').modal();
 
-            $("#submit").on("click", function () {
-
-                $("#submit").on("click", function (event) {
+            $("#submit").on("click", function (event) {
                 event.preventDefault();
+                //form validation for empty spaces
+                function validateForm() {
+                    var valid1 = true;
+                    $(".validate").each(function () {
+                        if ($(this).val() === '') {
+                            valid1 = false;
+                        }
+                    });
 
-
-
-                var newFriend = {
-                name: $("#name").val().trim(),
-                photo: $("#photo").val().trim(),
-                scores: function () {
-                var arr = [];
-                $('select').each(function () {
-                arr.push(parseInt($(this).val()));
-                });
-                return arr;
-                }()
-
+                    return valid1;
                 }
+                if (validateForm() == true) {
 
-                // AJAX post the data to the friends API.
-                $.post("/api/friends", newFriend)
-                .then(function(data) {
-                    alert("Adding new friend...");
-                // Grab the best matched from the AJAX response.
-                $("#matchName").text(data.name);
-                $("#score").text(data.score);
-                $("#matchImg").attr("src", data.photo);
-                });
-                $("#modal1").modal("open");
-                });
+                    // Create a new friend object
+                    var newFriend = {
+                        name: $("#name").val().trim(),
+                        photo: $("#photo").val().trim(),
+                        scores: [
+                            $("#q1").val(),
+                            $("#q2").val(),
+                            $("#q3").val(),
+                            $("#q4").val(),
+                            $("#q5").val(),
+                            $("#q6").val(),
+                            $("#q7").val(),
+                            $("#q8").val(),
+                            $("#q9").val(),
+                            $("#q10").val()
+                        ]
+                    };
+                    // AJAX post the data to the friends API.
+                    $.post("/api/friends", newFriend, function (data) {
+                        // Grab the best matched from the AJAX response.
+                        $("#matchName").text(data.name);
+                        $("#matchImg").attr("src", data.photo);
+                        alert("Adding new friend...");
+                    });
 
-
-                $("#name").val("");
-                $("#photo").val("");
-                $("#score").val("");
+                    // Show the modal with the best match
+                    $("#modal1").modal("open");
+                    //clear form submission
+                    $("#name").val("");
+                    $("#photo").val("");
+                    $("#q1").val("");
+                    $("#q2").val("");
+                    $("#q3").val("");
+                    $("#q4").val("");
+                    $("#q5").val("");
+                    $("#q6").val("");
+                    $("#q7").val("");
+                    $("#q8").val("");
+                    $("#q9").val("");
+                    $("#q10").val("");
+                } else {
+                    alert("Please fill out ALL of the fields before submitting you profile.")
+                }
 
 
             });
