@@ -7,43 +7,57 @@ module.exports = function (app) {
         res.json(friends);
     });
 
-    app.post("/api/friends", function (req, res) {
+    module.exports = function(app) {
 
-        var newFriends = req.body;
-        var userScores = newFriends.scores;
-        var bestMatch = {
-            name: "",
-            photo: "",
-            friendDifference: 1000
-        };
-
-        for (var i = 0; i < friends.length; i++) {
-            var scoresDiff = 0;
-
-            for (var j = 0; j < friends[i].scores[j]; j++) {
-                scoresDiff += Math.abs(parseInt(userScores[j]) - parseInt(friends[i].scores[j]));
-
-
-
-                // If the sum of differences is less then the differences of the current "best match"
-                if (scoresDiff <= bestMatch.friendDifference) {
-
-                    // Reset the bestMatch to be the new friend.
-                    bestMatch.name = friends[i].name;
-                    bestMatch.photo = friends[i].photo;
-                    bestMatch.friendDifference = scoresDiff;
-                }
-
-            }
+      app.get("/api/friends", function(req, res) {
+        res.json(friends);
+      });
+    
+      // handle the post request 
+      app.post("/api/friends", function(req, res) {
+        
+        // begin by setting up the array hoding the user's answers
+        var newFriend = req.body.scores;
+        // convert the values in surveyResults to integers
+        for (var i=0; i<newFriend .length; i++) {
+          newFriend [i] = parseInt(newFriend [i]);
         }
+    
+      
+        var bestDifference = 999999;
+        var bestMatch = 0; 
+       
+        for (i=0; i < friends.length; i++) {
+    
+        
+          var tempDifference = difference(newFriend , friends[i].scores);
+    
+          // console log the difference between user choices and pet being compared
+          console.log("difference between", newFriend , "and", friends[i].name, friends[i].scores, "=", tempDifference);
+    
+       
+          if (tempDifference < bestDifference) {
+            bestDifference = tempDifference;
+            bestMatch = i;
+          }
+        }
+    
+       
+        function difference(array1, array2) {
+    
+          
+          var differenceAmount=0;
+          
+          for (var i=0; i<array1.length; i++) {
+            differenceAmount += Math.abs(array1[i] - array2[i]);
+          }
+          
+          return differenceAmount;
+        }
+    
+        res.send(friends[bestMatch]);
+      });
+    };
 
-        // Finally save the user's data to the database (this has to happen AFTER the check. otherwise,
-        // the database will always return that the user is the user's best friend).
-        friends.push(newFriends);
-
-        // Return a JSON with the user's bestMatch. This will be used by the HTML in the next page
-        res.json(bestMatch);
-
-    });
-
-};
+} 
+        

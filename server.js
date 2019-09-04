@@ -1,41 +1,28 @@
 // Dependencies
-var express = require("express");
-var bodyParser = require("body-parser");
-var path = require("path");
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
 
 
-// Hey, Node - we have an express app
+
 var app = express();
 
 // create a port to be sent by Heroku 
 var PORT = process.env.PORT || 8080;
 
-// // express middleware for serving static files 
-// app.use(express.static("app/public"));
 
+// Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-
-app.use('/static', express.static(path.join(__dirname, 'app/public')))
-
-
-// // set up body Parser
-// app.use(express.json());
-// app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded())
+//makes static assets in the public folder available (style.css)
+app.use(express.static("app/public"));
 
 
 require('./app/routing/apiRoutes.js')(app);
 require('./app/routing/htmlRoutes.js')(app);
 
-
-
-// //all of the other routs
-//  apiRoutes = require("./app/routing/apiRoutes.js")(app);
-
-//  //html route
-//  htmlRoutes = require("./app/routing/htmlRoutes.js")(app);
 
  // set up a listener on the port
 app.listen(PORT, () => console.log("App listening on PORT " + PORT));
