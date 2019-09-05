@@ -23,9 +23,6 @@ module.exports = function (app) {
     var userScores = newFriend.scores;
     console.log(newFriend.scores);
 
-
-    // This variable will calculate the difference between the user"s scores and the scores of
-    // each user in the database
     var totalDifference = 0;
 
     // Here we loop through all the friend possibilities in the database.
@@ -51,12 +48,8 @@ module.exports = function (app) {
         }
       }
     }
-     // Finally save the user's data to the database (this has to happen AFTER the check. otherwise,
-    // the database will always return that the user is the user's best friend).
     friends.push(newFriend);
 
-  
-    // Return a JSON with the user's bestMatch. This will be used by the HTML in the next page
     res.json(bestMatch);
 
   });

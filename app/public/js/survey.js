@@ -35,9 +35,9 @@
                         $("#q10").val()
                     ]
                 };
-               
+                console.log(newFriend);
                 // AJAX post the data to the friends API.
-    
+              
                 $.post("/api/friends", newFriend, function (data) {
                     // Grab the best matched from the AJAX response.
                     $("#matchName").text(data.name);

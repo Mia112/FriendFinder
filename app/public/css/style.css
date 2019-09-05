@@ -1,16 +1,6 @@
 html {
     height: 100%;
 }
-body {
-    background-image: url('/css/img/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-.jumbotron {
-    background-image: url("app/public/img/background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
 
 .heading {
     letter-spacing: 3px;
@@ -71,7 +61,6 @@ h5 {
     border-color: #ffffffdc;
 }
 
-
 .surveyBody {
     background-color: rgb(252, 252, 252);
 }
@@ -110,8 +99,6 @@ nav {
 }
 
 
-
-
 #submit {
     color: rgb(248, 242, 242);
     background-color: rgb(42, 112, 91);
@@ -123,6 +110,15 @@ nav {
     outline-color: none;
     letter-spacing: 0.2rem;
 }
+.matched-image{
+    height: 70%; 
+    width: 100%; 
+    margin: 2% 0;
+}
 
-
-
+.matchedName{
+    color: rgb(21, 95, 70);
+    text-align: center;
+    padding-top: 1rem;
+    letter-spacing: 0.1rem;
+}

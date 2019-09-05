@@ -15,11 +15,11 @@
 </head>
 <nav class="navbar fixed-top navbar-light bg-dark">
     <div class="container" id="links">
-    
+
         <a class="navbar-brand" href="/">Friend Finder</a>
         <a class="api-link" href="/api/friends">API</a>
     </div>
-   
+
 </nav>
 
 
@@ -169,8 +169,8 @@
                         <option value="2">2 (Disagree)</option>
                         <option value="3">3 (Sometimes)</option>
                         <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option> -->
-                    </select> -->
+                        <option value="5">5 (Strongly Agree)</option>
+                    </select>
                     <br>
                     <br>
                     <br>
@@ -184,21 +184,24 @@
 
     </div>
     </div>
-    <div id="modal1" class="modal">
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">
             <div class="modal-header">
 
-                <h3 class="modal-title">Your Match:</h3>
+                <h3 class="modal-title">Your Match</h3>
             </div>
             <div class="modal-body">
                 <h4 id="matchName"></h4>
-                <img id="matchImg" src="" alt="match Image">
+                <img id="matchImg" class="matched-image" src="" alt="match Image">
             </div>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
+
 
     <script type="text/javascript" src="js/survey.js"></script>
 
